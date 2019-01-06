@@ -2,15 +2,18 @@ var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 
 var wins = 0;
 var loses = 0;
-var guesses, guessedLetters;
+var guesses;
+var guessedLetters = [];
 
 resetGame();
 
 
 document.onkeypress = function (event) {
-    var guessedLetters = event.key.toLowerCase();
+    var letter = event.key.toLocaleLowerCase();
+    guessedLetters.push(letter);
 
-    if (guessedLetters === computerChoice) {
+
+    if (letter === computerChoice) {
         wins++;
         alert("You Win!");
         resetGame();
@@ -28,7 +31,7 @@ document.onkeypress = function (event) {
     document.getElementById("win").innerHTML = "Wins: " + wins;
     document.getElementById("lose").innerHTML = "Losses: " + loses;
     document.getElementById("guess").innerHTML = "Guesses Left: " + guesses;
-    document.getElementById("guessedLetters").innerHTML += guessedLetters;
+    document.getElementById("guessedLetter").innerHTML = "Your Guesses So Far: " + guessedLetters; 
 }
 
 
@@ -38,7 +41,3 @@ function resetGame() {
     computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
     console.log("Letter to guess: " + computerChoice);
 }
-
-
-
-
